@@ -45,9 +45,25 @@ from the project's own files and shows it to you for confirmation.
 | 11 | Your project-specific rules |
 | 12 | Versioning and maintenance |
 
+## Install
+
+Run one of these from your project root. It downloads both files and never overwrites an existing one.
+
+**bash** — macOS / Linux / Git Bash
+
+```bash
+for f in AGENTS.md AGENT_STATE.md; do [ -e "$f" ] && echo "skip $f (exists)" || curl -fsSLo "$f" "https://raw.githubusercontent.com/marwan-ahmed/arabic-agents/main/$f"; done
+```
+
+**PowerShell** — Windows
+
+```powershell
+foreach ($f in 'AGENTS.md','AGENT_STATE.md') { if (Test-Path $f) { "skip $f (exists)" } else { Invoke-WebRequest "https://raw.githubusercontent.com/marwan-ahmed/arabic-agents/main/$f" -OutFile $f -UseBasicParsing } }
+```
+
 ## Usage
 
-1. Copy `AGENTS.md` and `AGENT_STATE.md` to your project root.
+1. Add `AGENTS.md` and `AGENT_STATE.md` to your project root with the install command above, or copy them manually.
 2. Set `PROJECT_NAME` in section 1.
 3. Start a session with your agent: it infers the remaining fields from the project files (section 1.1), shows each value with its source, and waits for your confirmation.
 4. Add your project's rules in section 11.

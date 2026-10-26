@@ -44,9 +44,29 @@
 | 11 | قواعد خاصة بمشروعك |
 | 12 | الإصدار والصيانة |
 
+## التثبيت
+
+من جذر مشروعك، شغّل أحد الأمرين. ينزّل الملفين، ولا يستبدل ملفاً موجوداً.
+
+<div dir="ltr">
+
+**bash** — macOS / Linux / Git Bash
+
+```bash
+for f in AGENTS.md AGENT_STATE.md; do [ -e "$f" ] && echo "skip $f (exists)" || curl -fsSLo "$f" "https://raw.githubusercontent.com/marwan-ahmed/arabic-agents/main/$f"; done
+```
+
+**PowerShell** — Windows
+
+```powershell
+foreach ($f in 'AGENTS.md','AGENT_STATE.md') { if (Test-Path $f) { "skip $f (exists)" } else { Invoke-WebRequest "https://raw.githubusercontent.com/marwan-ahmed/arabic-agents/main/$f" -OutFile $f -UseBasicParsing } }
+```
+
+</div>
+
 ## طريقة الاستخدام
 
-1. انسخ `AGENTS.md` و `AGENT_STATE.md` إلى جذر مشروعك.
+1. ثبّت `AGENTS.md` و `AGENT_STATE.md` في جذر مشروعك بأمر التثبيت أعلاه، أو انسخهما يدوياً.
 2. اكتب اسم المشروع في الحقل `PROJECT_NAME` بالقسم 1.
 3. افتح جلسة مع الوكيل: سيستنتج باقي الحقول من ملفات المشروع (القسم 1.1)، ويعرض كل قيمة ومصدرها، وينتظر تأكيدك.
 4. أضف قواعد مشروعك في القسم 11.
