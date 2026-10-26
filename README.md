@@ -16,16 +16,126 @@
 - **يضبط تصرفات الوكيل نفسه:** المحتوى الخارجي بيانات لا أوامر، وموافقة قبل الأوامر الخطرة، ولا commit بلا طلب، وتحقق من الحزم قبل تثبيتها.
 - **بالعربية:** مع إبقاء المصطلحات التقنية بالإنجليزية كما يستخدمها المطوّرون.
 
+لترى الفرق بنفسك، اقرأ [EXAMPLES.md](EXAMPLES.md): ستة مواقف يتصرف فيها الوكيل بدون القالب ومعه.
+
+## دليل الاستخدام
+
+### 1. اختر نسخة واحدة
+
+| | الكاملة `AGENTS.md` | المختصرة `AGENTS.lite.md` |
+| --- | --- | --- |
+| تناسب | مشروعاً حقيقياً فيه قاعدة بيانات ومستخدمون أو فريق | مشروعاً صغيراً، أو نموذجاً أولياً، أو أول تجربة للقالب |
+| الطول | ~530 سطراً (~24 KB) | ~120 سطراً (~12 KB) |
+| الأسلوب | شرح وأمثلة كود وقوائم تحقق | قاعدة في سطر، ومثال قصير عند الحاجة |
+| ما لا تتضمنه | — | اقتصاد التوكنز (3)، وجودة الكود (6)، وإعلانات الجلسة (7.1–7.2)، وبروتوكول التغييرات و migrations (9)، والمرجع السريع (10)، والإصدار (12) |
+
+ضع في مشروعك نسخة واحدة فقط. في الحالتين يُحفظ الملف باسم `AGENTS.md`، لأن أدوات البرمجة تبحث عن هذا الاسم بالضبط.
+
+### 2. ثبّت الملفين
+
+افتح الطرفية (Terminal) في جذر مشروعك، أي المجلد الذي فيه `package.json` أو `pubspec.yaml` أو ما يقابلهما، وشغّل **أمراً واحداً** يناسب نسختك ونظامك:
+
+<div dir="ltr">
+
+**Full — bash** (macOS / Linux / Git Bash)
+
+```bash
+for f in AGENTS.md AGENT_STATE.md; do [ -e "$f" ] && echo "skip $f (exists)" || curl -fsSLo "$f" "https://raw.githubusercontent.com/marwan-ahmed/arabic-agents/main/$f"; done
+```
+
+**Full — PowerShell** (Windows)
+
+```powershell
+foreach ($f in 'AGENTS.md','AGENT_STATE.md') { if (Test-Path $f) { "skip $f (exists)" } else { Invoke-WebRequest "https://raw.githubusercontent.com/marwan-ahmed/arabic-agents/main/$f" -OutFile $f -UseBasicParsing } }
+```
+
+**Lite — bash** (macOS / Linux / Git Bash)
+
+```bash
+for s in AGENTS.lite.md AGENT_STATE.md; do f=${s/.lite/}; [ -e "$f" ] && echo "skip $f (exists)" || curl -fsSLo "$f" "https://raw.githubusercontent.com/marwan-ahmed/arabic-agents/main/$s"; done
+```
+
+**Lite — PowerShell** (Windows)
+
+```powershell
+foreach ($s in 'AGENTS.lite.md','AGENT_STATE.md') { $f = $s -replace '\.lite', ''; if (Test-Path $f) { "skip $f (exists)" } else { Invoke-WebRequest "https://raw.githubusercontent.com/marwan-ahmed/arabic-agents/main/$s" -OutFile $f -UseBasicParsing } }
+```
+
+</div>
+
+ينزّل الأمر ملفين إلى جذر مشروعك: `AGENTS.md` و `AGENT_STATE.md`. إن وُجد أحدهما من قبل يتجاوزه ويطبع `skip … (exists)`، ولا يكتب فوقه.
+
+بدون طرفية: نزّل الملفين من هذه الصفحة وضعهما في جذر المشروع. وإن اخترت المختصرة فغيّر اسم `AGENTS.lite.md` إلى `AGENTS.md`.
+
+### 3. اكتب اسم مشروعك
+
+افتح `AGENTS.md`، وفي القسم 1 ضع اسم مشروعك مكان `<اكتب اسم المشروع هنا>`:
+
+<div dir="ltr">
+
+```yaml
+PROJECT_NAME: "my-shop"
+```
+
+</div>
+
+اترك باقي الحقول `<auto>` كما هي؛ الوكيل يملؤها.
+
+### 4. افتح جلسة جديدة وأكّد ما يعرضه الوكيل
+
+افتح جلسة جديدة مع وكيلك واطلب أي مهمة. قبل أن يكتب أي كود يجب أن:
+
+1. يقرأ ملفات مشروعك ويملأ حقول القسم 1: اللغات، والأُطر، وقاعدة البيانات، والأوامر.
+2. يعرض عليك كل قيمة ومصدرها في رسالة واحدة، ويسألك عمّا لم يستطع تحديده.
+3. ينتظر تأكيدك.
+
+راجع القيم، وصحّح ما كان خطأً، ثم أكّد. من هنا يعمل الوكيل بالقواعد في كل جلسة.
+
+**إن بدأ يكتب الكود مباشرةً** فأداتك لم تقرأ `AGENTS.md`. هو [صيغة مفتوحة](https://agents.md) تقرؤها أدوات كثيرة تلقائياً، وبعضها يحتاج إعداداً.
+اكتب له في أول رسالة: «اقرأ AGENTS.md في جذر المشروع والتزم به»، وراجع توثيق أداتك لتجعلها تقرؤه في كل جلسة.
+
+### 5. أضف قواعد مشروعك (اختياري)
+
+في القسم 11 من `AGENTS.md` اكتب ما يخص مشروعك، كل قاعدة في سطر يبدأ بشرطة:
+
+```markdown
+- كل مبلغ مالي يُخزَّن بأصغر وحدة (integer)، لا float.
+- لا يُحذف عقد قسط نهائياً؛ يُؤرشف فقط.
+```
+
+هذه القواعد تتقدم على قواعد القالب، ما عدا قواعد الأمان.
+
+### 6. قبل أول commit
+
+- إن كان أكثر من مطوّر يعمل على المشروع: أضف `AGENT_STATE.md` إلى `.gitignore`، فلكل مطوّر مودوله النشط.
+- لا تحذف سطور الإسناد في آخر `AGENTS.md`؛ يشترطها الترخيص.
+
+### تأكّد أنه يعمل
+
+أعطِ وكيلك طلباً غامضاً مثل «أضف زر تصدير لقائمة العملاء». مع القالب يجب أن يسألك عن الصيغة والأعمدة والصلاحيات قبل أن يكتب كوداً.
+مواقف أخرى للتجربة في [EXAMPLES.md](EXAMPLES.md).
+
+### التحديث إلى إصدار أحدث
+
+أمر التثبيت لا يكتب فوق ملف موجود، لذلك:
+
+1. احفظ قواعدك من القسم 11 في مكان مؤقت.
+2. احذف `AGENTS.md`، ثم شغّل أمر التثبيت من جديد.
+3. أعد قواعدك إلى القسم 11، واكتب اسم المشروع. الوكيل يعيد ملء باقي القسم 1 في الجلسة التالية.
+
+أما `AGENT_STATE.md` فيبقى كما هو.
+
 ## الملفات
 
-| الملف | الغرض |
-| --- | --- |
-| [AGENTS.md](AGENTS.md) | القواعد نفسها — يُنسخ إلى مشروعك |
-| [AGENTS.lite.md](AGENTS.lite.md) | نسخة مختصرة من القواعد — تُنسخ إلى مشروعك باسم `AGENTS.md` بدلاً من الكاملة |
-| [AGENT_STATE.md](AGENT_STATE.md) | حالة العمل المتغيرة (المرحلة والمودول النشط) — يُنسخ إلى مشروعك |
-| [CHANGELOG.md](CHANGELOG.md) | سجل إصدارات القالب |
-| [LICENSE](LICENSE) | ترخيص هذا القالب (MIT) |
-| [NOTICE](NOTICE) | إسناد المصدر وترخيصه |
+| الملف | الغرض | يُنسخ إلى مشروعك؟ |
+| --- | --- | --- |
+| [AGENTS.md](AGENTS.md) | القواعد كاملة | نعم، أو المختصرة بدلاً منه |
+| [AGENTS.lite.md](AGENTS.lite.md) | القواعد مختصرة | نعم، باسم `AGENTS.md` |
+| [AGENT_STATE.md](AGENT_STATE.md) | حالة العمل المتغيرة (المرحلة والمودول النشط) | نعم |
+| [EXAMPLES.md](EXAMPLES.md) | ستة مواقف للوكيل بدون القالب ومعه | لا، للقراءة |
+| [CHANGELOG.md](CHANGELOG.md) | سجل إصدارات القالب | لا |
+| [LICENSE](LICENSE) | ترخيص هذا القالب (MIT) | لا |
+| [NOTICE](NOTICE) | إسناد المصدر وترخيصه | لا |
 
 ## محتوى القالب
 
@@ -44,69 +154,6 @@
 | 10 | مرجع سريع |
 | 11 | قواعد خاصة بمشروعك |
 | 12 | الإصدار والصيانة |
-
-## النسخة المختصرة
-
-`AGENTS.lite.md` يحتفظ بجوهر القواعد بصياغة مضغوطة وبلا تكرار، فيخفّ السياق الذي يُحمَّل في كل جلسة. أرقام أقسامه كما في النسخة الكاملة.
-
-| | الكاملة `AGENTS.md` | المختصرة `AGENTS.lite.md` |
-| --- | --- | --- |
-| الطول | ~530 سطراً (~24 KB) | ~120 سطراً (~12 KB) |
-| الأقسام | 0–12 | 0، 1، 2، 4، 5، 7.3–7.4، 8، 11 |
-| الأسلوب | شرح وأمثلة كود وقوائم تحقق | قاعدة في سطر، ومثال قصير عند الحاجة |
-| ما لا تتضمنه | — | اقتصاد التوكنز (3)، وجودة الكود (6)، وإعلانات الجلسة (7.1–7.2)، وبروتوكول التغييرات و migrations (9)، والمرجع السريع (10)، والإصدار (12) |
-
-## التثبيت
-
-من جذر مشروعك، شغّل أحد الأمرين. ينزّل الملفين، ولا يستبدل ملفاً موجوداً.
-
-<div dir="ltr">
-
-**bash** — macOS / Linux / Git Bash
-
-```bash
-for f in AGENTS.md AGENT_STATE.md; do [ -e "$f" ] && echo "skip $f (exists)" || curl -fsSLo "$f" "https://raw.githubusercontent.com/marwan-ahmed/arabic-agents/main/$f"; done
-```
-
-**PowerShell** — Windows
-
-```powershell
-foreach ($f in 'AGENTS.md','AGENT_STATE.md') { if (Test-Path $f) { "skip $f (exists)" } else { Invoke-WebRequest "https://raw.githubusercontent.com/marwan-ahmed/arabic-agents/main/$f" -OutFile $f -UseBasicParsing } }
-```
-
-</div>
-
-**أو النسخة المختصرة:** الأمران التاليان يحفظان `AGENTS.lite.md` باسم `AGENTS.md` مع `AGENT_STATE.md`، ولا يستبدلان ملفاً موجوداً.
-
-<div dir="ltr">
-
-**bash** — macOS / Linux / Git Bash
-
-```bash
-for s in AGENTS.lite.md AGENT_STATE.md; do f=${s/.lite/}; [ -e "$f" ] && echo "skip $f (exists)" || curl -fsSLo "$f" "https://raw.githubusercontent.com/marwan-ahmed/arabic-agents/main/$s"; done
-```
-
-**PowerShell** — Windows
-
-```powershell
-foreach ($s in 'AGENTS.lite.md','AGENT_STATE.md') { $f = $s -replace '\.lite', ''; if (Test-Path $f) { "skip $f (exists)" } else { Invoke-WebRequest "https://raw.githubusercontent.com/marwan-ahmed/arabic-agents/main/$s" -OutFile $f -UseBasicParsing } }
-```
-
-</div>
-
-## طريقة الاستخدام
-
-1. ثبّت `AGENTS.md` و `AGENT_STATE.md` في جذر مشروعك بأمر التثبيت أعلاه، أو انسخهما يدوياً.
-2. اكتب اسم المشروع في الحقل `PROJECT_NAME` بالقسم 1.
-3. افتح جلسة مع الوكيل: سيستنتج باقي الحقول من ملفات المشروع (القسم 1.1)، ويعرض كل قيمة ومصدرها، وينتظر تأكيدك.
-4. أضف قواعد مشروعك في القسم 11.
-5. في الفرق: أضف `AGENT_STATE.md` إلى `.gitignore`، فلكل مطوّر مودوله النشط.
-6. لا تحذف سطر الإسناد في آخر `AGENTS.md`؛ يشترطه ترخيص المصدر.
-
-## التوافق
-
-`AGENTS.md` [صيغة مفتوحة](https://agents.md) تقرؤها أدوات برمجة كثيرة بالذكاء الاصطناعي.
-إن كانت أداتك تقرأ اسم ملف آخر، فراجع توثيقها لتوجيهها إلى `AGENTS.md`.
 
 ## الإصدار
 
