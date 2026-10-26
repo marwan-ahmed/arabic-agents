@@ -527,3 +527,5 @@ REVIEW_TRIGGER: "كل milestone رئيسي أو عند تغيير الـ stack"
 
 القسم 2 مقتبس من [andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) لـ forrestchang (MIT License — النص في NOTICE المرافق للقالب)،
 المبني على ملاحظات Andrej Karpathy حول أخطاء نماذج اللغة في البرمجة.
+
+القالب من إعداد [Marwan Ahmed](https://marwan-ahmed.com/).
