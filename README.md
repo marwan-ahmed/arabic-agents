@@ -4,7 +4,7 @@
 
 **عقد عمل لوكلاء البرمجة بالذكاء الاصطناعي: كود أقل، وأمان أعلى، وأسئلة قبل الأخطاء لا بعدها.**
 
-[English](README.en.md)
+إعداد [Marwan Ahmed](https://marwan-ahmed.com/) · [English](README.en.md)
 
 ملف قواعد واحد تضعه في جذر مشروعك، فيقرؤه وكيل البرمجة في بداية كل جلسة. أنت تكتب اسم المشروع فقط،
 والوكيل يستنتج الباقي (اللغات، والأُطر، وقاعدة البيانات، والأوامر) من ملفات المشروع نفسه ويعرضه عليك للتأكيد.
@@ -87,6 +87,6 @@ foreach ($f in 'AGENTS.md','AGENT_STATE.md') { if (Test-Path $f) { "skip $f (exi
 - القسم 2 مقتبس من [andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) لـ forrestchang (MIT)، المبني على ملاحظات Andrej Karpathy حول أخطاء نماذج اللغة في البرمجة. التفاصيل في [NOTICE](NOTICE).
 - هذا القالب مرخّص بـ [MIT](LICENSE).
 
-**المشرف على القالب:** Marwan Ahmed
+**المشرف على القالب:** [Marwan Ahmed](https://marwan-ahmed.com/)
 
 </div>

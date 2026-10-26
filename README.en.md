@@ -2,7 +2,7 @@
 
 **A working contract for AI coding agents: less code, stronger security, and questions before mistakes — not after.**
 
-[العربية](README.md)
+By [Marwan Ahmed](https://marwan-ahmed.com/) · [العربية](README.md)
 
 One rules file you drop into your project root; your coding agent reads it at the start of every session.
 You write only the project name. The agent infers the rest (languages, frameworks, database, commands)
@@ -84,4 +84,4 @@ Current version **2.1.0** — see [CHANGELOG.md](CHANGELOG.md).
 - Section 2 is adapted from [andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) by forrestchang (MIT), based on Andrej Karpathy's observations on LLM coding pitfalls. See [NOTICE](NOTICE).
 - This template is licensed under [MIT](LICENSE).
 
-**Maintainer:** Marwan Ahmed
+**Maintainer:** [Marwan Ahmed](https://marwan-ahmed.com/)
