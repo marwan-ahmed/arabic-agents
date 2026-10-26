@@ -22,6 +22,7 @@ from the project's own files and shows it to you for confirmation.
 | File | Purpose |
 | --- | --- |
 | [AGENTS.md](AGENTS.md) | The rules — copy into your project |
+| [AGENTS.lite.md](AGENTS.lite.md) | A condensed version of the rules — copy into your project as `AGENTS.md` instead of the full one |
 | [AGENT_STATE.md](AGENT_STATE.md) | Changing work state (current phase, active module) — copy into your project |
 | [CHANGELOG.md](CHANGELOG.md) | Template version history |
 | [LICENSE](LICENSE) | License for this template (MIT) |
@@ -45,6 +46,17 @@ from the project's own files and shows it to you for confirmation.
 | 11 | Your project-specific rules |
 | 12 | Versioning and maintenance |
 
+## Lite version
+
+`AGENTS.lite.md` keeps the core rules in condensed form, without repetition, so each session loads less context. Its section numbers match the full version.
+
+| | Full `AGENTS.md` | Lite `AGENTS.lite.md` |
+| --- | --- | --- |
+| Length | ~530 lines (~24 KB) | ~120 lines (~12 KB) |
+| Sections | 0–12 | 0, 1, 2, 4, 5, 7.3–7.4, 8, 11 |
+| Style | Explanations, code examples, and checklists | One line per rule, a short example where needed |
+| Left out | — | Token economy (3), code quality (6), session announcements (7.1–7.2), change protocol and migrations (9), quick reference (10), versioning (12) |
+
 ## Install
 
 Run one of these from your project root. It downloads both files and never overwrites an existing one.
@@ -59,6 +71,20 @@ for f in AGENTS.md AGENT_STATE.md; do [ -e "$f" ] && echo "skip $f (exists)" || 
 
 ```powershell
 foreach ($f in 'AGENTS.md','AGENT_STATE.md') { if (Test-Path $f) { "skip $f (exists)" } else { Invoke-WebRequest "https://raw.githubusercontent.com/marwan-ahmed/arabic-agents/main/$f" -OutFile $f -UseBasicParsing } }
+```
+
+**Or the Lite version:** these save `AGENTS.lite.md` as `AGENTS.md`, along with `AGENT_STATE.md`, and never overwrite an existing file.
+
+**bash** — macOS / Linux / Git Bash
+
+```bash
+for s in AGENTS.lite.md AGENT_STATE.md; do f=${s/.lite/}; [ -e "$f" ] && echo "skip $f (exists)" || curl -fsSLo "$f" "https://raw.githubusercontent.com/marwan-ahmed/arabic-agents/main/$s"; done
+```
+
+**PowerShell** — Windows
+
+```powershell
+foreach ($s in 'AGENTS.lite.md','AGENT_STATE.md') { $f = $s -replace '\.lite', ''; if (Test-Path $f) { "skip $f (exists)" } else { Invoke-WebRequest "https://raw.githubusercontent.com/marwan-ahmed/arabic-agents/main/$s" -OutFile $f -UseBasicParsing } }
 ```
 
 ## Usage

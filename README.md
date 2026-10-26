@@ -21,6 +21,7 @@
 | الملف | الغرض |
 | --- | --- |
 | [AGENTS.md](AGENTS.md) | القواعد نفسها — يُنسخ إلى مشروعك |
+| [AGENTS.lite.md](AGENTS.lite.md) | نسخة مختصرة من القواعد — تُنسخ إلى مشروعك باسم `AGENTS.md` بدلاً من الكاملة |
 | [AGENT_STATE.md](AGENT_STATE.md) | حالة العمل المتغيرة (المرحلة والمودول النشط) — يُنسخ إلى مشروعك |
 | [CHANGELOG.md](CHANGELOG.md) | سجل إصدارات القالب |
 | [LICENSE](LICENSE) | ترخيص هذا القالب (MIT) |
@@ -44,6 +45,17 @@
 | 11 | قواعد خاصة بمشروعك |
 | 12 | الإصدار والصيانة |
 
+## النسخة المختصرة
+
+`AGENTS.lite.md` يحتفظ بجوهر القواعد بصياغة مضغوطة وبلا تكرار، فيخفّ السياق الذي يُحمَّل في كل جلسة. أرقام أقسامه كما في النسخة الكاملة.
+
+| | الكاملة `AGENTS.md` | المختصرة `AGENTS.lite.md` |
+| --- | --- | --- |
+| الطول | ~530 سطراً (~24 KB) | ~120 سطراً (~12 KB) |
+| الأقسام | 0–12 | 0، 1، 2، 4، 5، 7.3–7.4، 8، 11 |
+| الأسلوب | شرح وأمثلة كود وقوائم تحقق | قاعدة في سطر، ومثال قصير عند الحاجة |
+| ما لا تتضمنه | — | اقتصاد التوكنز (3)، وجودة الكود (6)، وإعلانات الجلسة (7.1–7.2)، وبروتوكول التغييرات و migrations (9)، والمرجع السريع (10)، والإصدار (12) |
+
 ## التثبيت
 
 من جذر مشروعك، شغّل أحد الأمرين. ينزّل الملفين، ولا يستبدل ملفاً موجوداً.
@@ -60,6 +72,24 @@ for f in AGENTS.md AGENT_STATE.md; do [ -e "$f" ] && echo "skip $f (exists)" || 
 
 ```powershell
 foreach ($f in 'AGENTS.md','AGENT_STATE.md') { if (Test-Path $f) { "skip $f (exists)" } else { Invoke-WebRequest "https://raw.githubusercontent.com/marwan-ahmed/arabic-agents/main/$f" -OutFile $f -UseBasicParsing } }
+```
+
+</div>
+
+**أو النسخة المختصرة:** الأمران التاليان يحفظان `AGENTS.lite.md` باسم `AGENTS.md` مع `AGENT_STATE.md`، ولا يستبدلان ملفاً موجوداً.
+
+<div dir="ltr">
+
+**bash** — macOS / Linux / Git Bash
+
+```bash
+for s in AGENTS.lite.md AGENT_STATE.md; do f=${s/.lite/}; [ -e "$f" ] && echo "skip $f (exists)" || curl -fsSLo "$f" "https://raw.githubusercontent.com/marwan-ahmed/arabic-agents/main/$s"; done
+```
+
+**PowerShell** — Windows
+
+```powershell
+foreach ($s in 'AGENTS.lite.md','AGENT_STATE.md') { $f = $s -replace '\.lite', ''; if (Test-Path $f) { "skip $f (exists)" } else { Invoke-WebRequest "https://raw.githubusercontent.com/marwan-ahmed/arabic-agents/main/$s" -OutFile $f -UseBasicParsing } }
 ```
 
 </div>
