@@ -1,0 +1,42 @@
+Third-party notice
+==================
+
+Section 2 of AGENTS.md ("طريقة العمل" — Think Before Coding, Simplicity First,
+Surgical Changes, Goal-Driven Execution) is an Arabic adaptation of:
+
+  andrej-karpathy-skills
+  https://github.com/multica-ai/andrej-karpathy-skills
+  (formerly https://github.com/forrestchang/andrej-karpathy-skills)
+  Author: forrestchang
+  Based on Andrej Karpathy's observations on LLM coding pitfalls.
+
+License status as checked on 2026-10-26: the upstream project declares the MIT
+License in its README.md and in .claude-plugin/plugin.json, which names
+forrestchang as author. It ships no LICENSE file and no explicit copyright line,
+so the copyright line below is taken from that author field.
+
+The standard MIT License text, as it applies to the upstream work:
+
+-------------------------------------------------------------------------------
+
+MIT License
+
+Copyright (c) forrestchang and the andrej-karpathy-skills contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
