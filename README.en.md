@@ -74,20 +74,37 @@ PROJECT_NAME: "my-shop"
 
 Leave the other `<auto>` fields as they are; the agent fills them in.
 
-### 4. Start a new session and confirm what the agent shows
+### 4. Send the start message in a new session
 
-Start a new session with your agent and ask for any task. Before writing any code, it should:
+Start a new session with your agent, then copy this message as is and send it:
 
-1. Read your project files and fill in section 1: languages, frameworks, database, and commands.
-2. Show you each value with its source in one message, and ask about anything it could not determine.
-3. Wait for your confirmation.
+```text
+Read AGENTS.md and AGENT_STATE.md in the project root, and follow everything in AGENTS.md in all your work.
 
-Review the values, correct anything wrong, then confirm. From then on the agent works by the rules in every session.
+Before any code, run the initialization protocol (section 1.1):
+1. Infer the section 1 values from the project's own files, not from memory.
+2. Write the values into section 1 of AGENTS.md, and write CURRENT_PHASE and ACTIVE_MODULE into AGENT_STATE.md.
+3. Show me each value with its source in one message, and ask me one question about anything you could not determine.
+4. Wait for my confirmation, and write no code before it.
+```
 
-**If it jumps straight into code,** your tool did not read `AGENTS.md`. It is an [open format](https://agents.md) that many tools read automatically; some need setup.
-Tell it in your first message: "Read AGENTS.md in the project root and follow it", and check your tool's documentation so it reads the file every session.
+If you skipped the project name in step 3, add a first line such as: `Project name: my-shop`.
 
-### 5. Add your project's rules (optional)
+The agent reads your project files, then shows you each value with its source in one message: languages, frameworks, database, and commands.
+Review them, correct anything wrong, then confirm. The agent writes the values into `AGENTS.md` and `AGENT_STATE.md`, so they are saved for future sessions and you never repeat them.
+
+### 5. In later sessions
+
+Most tools read `AGENTS.md` automatically at the start of every session, so you don't need to say anything. It is an [open format](https://agents.md) supported by many tools.
+
+If the agent doesn't follow the rules — for example, it writes code without asking when your request is vague — your tool is not reading the file automatically.
+Start each session with this line, and check your tool's documentation so it reads the file on its own:
+
+```text
+Read AGENTS.md and AGENT_STATE.md in the project root and follow them before anything else.
+```
+
+### 6. Add your project's rules (optional)
 
 In section 11 of `AGENTS.md`, write what is specific to your project, one rule per line starting with a dash:
 
@@ -98,7 +115,7 @@ In section 11 of `AGENTS.md`, write what is specific to your project, one rule p
 
 These rules take precedence over the template's rules, except security.
 
-### 6. Before your first commit
+### 7. Before your first commit
 
 - If more than one developer works on the project, add `AGENT_STATE.md` to `.gitignore`, since each developer has their own active module.
 - Keep the attribution lines at the end of `AGENTS.md`; the license requires them.
@@ -114,7 +131,7 @@ The install command never overwrites an existing file, so:
 
 1. Save your section 11 rules somewhere temporary.
 2. Delete `AGENTS.md`, then run the install command again.
-3. Put your rules back in section 11 and write the project name. The agent refills the rest of section 1 in the next session.
+3. Put your rules back in section 11, write the project name, then send the start message from step 4 so the agent refills the rest of section 1.
 
 `AGENT_STATE.md` stays as it is.
 
