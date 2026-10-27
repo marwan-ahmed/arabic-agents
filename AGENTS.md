@@ -511,7 +511,7 @@ git:
 ## 🔖 القسم 12 — الإصدار والصيانة
 
 ```yaml
-RULES_VERSION: "2.1.0"     # إصدار القالب؛ سجل تغييراته في CHANGELOG.md المرافق للقالب
+RULES_VERSION: "2.2.0"     # إصدار القالب؛ سجل تغييراته في CHANGELOG.md المرافق للقالب
 CREATED: "<auto>"          # تاريخ التهيئة، يملؤه الوكيل
 REVIEW_TRIGGER: "كل milestone رئيسي أو عند تغيير الـ stack"
 ```

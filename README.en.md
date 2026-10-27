@@ -167,7 +167,7 @@ The install command never overwrites an existing file, so:
 
 ## Version
 
-Current version **2.1.0** — see [CHANGELOG.md](CHANGELOG.md).
+Current version **2.2.0** — see [CHANGELOG.md](CHANGELOG.md).
 
 ## Attribution and license
 

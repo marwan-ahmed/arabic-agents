@@ -174,7 +174,7 @@ PROJECT_NAME: "my-shop"
 
 ## الإصدار
 
-الإصدار الحالي **2.1.0** — التفاصيل في [CHANGELOG.md](CHANGELOG.md).
+الإصدار الحالي **2.2.0** — التفاصيل في [CHANGELOG.md](CHANGELOG.md).
 
 ## الإسناد والترخيص
 
